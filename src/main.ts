@@ -1,8 +1,12 @@
-function handleFetch(event: FetchEvent) {
-  const response = new Response("Hello World!", {
-    headers: { "content-type": "text/plain" },
-  });
-  event.respondWith(response);
-}
+import { Application, Context } from "./deps.ts";
 
-addEventListener("fetch", handleFetch);
+const app = new Application();
+
+app.use((ctx: Context) => {
+  ctx.response.body = "Hello world!";
+});
+
+console.log("tinyRobots server is running at http://localhost:8000");
+console.log(import.meta.url);
+
+await app.listen("127.0.0.1:8000");
